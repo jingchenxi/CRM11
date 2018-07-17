@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NewCRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="depId" />
+    </Key>
+    <Property Name="depId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="depName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="depRemark" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
+    <Property Name="depIsDel" Type="Boolean" Nullable="false" />
+    <Property Name="depAddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
+    <NavigationProperty Name="Role" Relationship="NewCRMModel.FK_Role_Department" FromRole="Department" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="empId" />
+    </Key>
+    <Property Name="empId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="empDepId" Type="Int32" />
+    <Property Name="empCnName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="empLoginName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="empLoginPwd" Type="String" MaxLength="32" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="empSex" Type="Boolean" Nullable="false" />
+    <Property Name="empAge" Type="Int16" Nullable="false" />
+    <Property Name="empCellPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="empPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="empAddress" Type="String" MaxLength="220" FixedLength="false" Unicode="false" />
+    <Property Name="empIsDel" Type="Boolean" Nullable="false" />
+    <Property Name="empAddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Department" Relationship="Self.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
+    <NavigationProperty Name="EmpRoleRelation" Relationship="Self.FK_EmpRoleRelation_Employee" FromRole="Employee" ToRole="EmpRoleRelation" />
+    <NavigationProperty Name="VipPermssion" Relationship="Self.FK_VipPermssion_Employee" FromRole="Employee" ToRole="VipPermssion" />
+  </EntityType>
+  <EntityType Name="EmpRoleRelation">
+    <Key>
+      <PropertyRef Name="erId" />
+    </Key>
+    <Property Name="erId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="erUId" Type="Int32" Nullable="false" />
+    <Property Name="erRId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_EmpRoleRelation_Employee" FromRole="EmpRoleRelation" ToRole="Employee" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_EmpRoleRelation_Role" FromRole="EmpRoleRelation" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="Permission">
+    <Key>
+      <PropertyRef Name="perId" />
+    </Key>
+    <Property Name="perId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="perParent" Type="Int32" Nullable="false" />
+    <Property Name="perName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="perRemark" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="perAreaName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="perControllerName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="perActionName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="perFormMethod" Type="Int16" Nullable="false" />
+    <Property Name="perOperationType" Type="Int16" Nullable="false" />
+    <Property Name="perJsMethodName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="perIco" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="perIsLink" Type="Boolean" Nullable="false" />
+    <Property Name="perOrder" Type="Int32" Nullable="false" />
+    <Property Name="perIsShow" Type="Boolean" Nullable="false" />
+    <Property Name="perIsDel" Type="Boolean" Nullable="false" />
+    <Property Name="perAddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="RolePerRelationship" Relationship="Self.FK_RolePerRelationship_Permission" FromRole="Permission" ToRole="RolePerRelationship" />
+    <NavigationProperty Name="VipPermssion" Relationship="Self.FK_VipPermssion_Permission" FromRole="Permission" ToRole="VipPermssion" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="roleId" />
+    </Key>
+    <Property Name="roleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="roleDepId" Type="Int32" />
+    <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="roleIsDel" Type="Boolean" Nullable="false" />
+    <Property Name="roleAddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="EmpRoleRelation" Relationship="Self.FK_EmpRoleRelation_Role" FromRole="Role" ToRole="EmpRoleRelation" />
+    <NavigationProperty Name="RolePerRelationship" Relationship="Self.FK_RolePerRelationship_Role" FromRole="Role" ToRole="RolePerRelationship" />
+    <NavigationProperty Name="Department" Relationship="NewCRMModel.FK_Role_Department" FromRole="Role" ToRole="Department" />
+  </EntityType>
+  <EntityType Name="RolePerRelationship">
+    <Key>
+      <PropertyRef Name="rprId" />
+    </Key>
+    <Property Name="rprId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rprRoleId" Type="Int32" Nullable="false" />
+    <Property Name="rprPerId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Permission" Relationship="Self.FK_RolePerRelationship_Permission" FromRole="RolePerRelationship" ToRole="Permission" />
+    <NavigationProperty Name="Role" Relationship="Self.FK_RolePerRelationship_Role" FromRole="RolePerRelationship" ToRole="Role" />
+  </EntityType>
+  <EntityType Name="VipPermssion">
+    <Key>
+      <PropertyRef Name="vpId" />
+    </Key>
+    <Property Name="vpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vpUId" Type="Int32" Nullable="false" />
+    <Property Name="vpPId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_VipPermssion_Employee" FromRole="VipPermssion" ToRole="Employee" />
+    <NavigationProperty Name="Permission" Relationship="Self.FK_VipPermssion_Permission" FromRole="VipPermssion" ToRole="Permission" />
+  </EntityType>
+  <EntityType Name="WorkFLow">
+    <Key>
+      <PropertyRef Name="wfId" />
+    </Key>
+    <Property Name="wfId" Type="Int32" Nullable="false" />
+    <Property Name="wfName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="wfHtmlSrc" Type="String" MaxLength="550" FixedLength="false" Unicode="false" />
+    <Property Name="wfIsDel" Type="Boolean" Nullable="false" />
+    <Property Name="wfAddtime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="WorkFlowApply">
+    <Key>
+      <PropertyRef Name="wfaId" />
+    </Key>
+    <Property Name="wfaId" Type="Int32" Nullable="false" />
+    <Property Name="wfaWFId" Type="Int32" Nullable="false" />
+    <Property Name="wfaCurNodeId" Type="Int32" Nullable="false" />
+    <Property Name="wfaUserId" Type="Int32" Nullable="false" />
+    <Property Name="wfaTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="wfaContent" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="wfaRemark" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="wfaPriority" Type="Int16" Nullable="false" />
+    <Property Name="wfaStatue" Type="Int16" Nullable="false" />
+    <Property Name="wfaAddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="wfaIsDel" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorkFlowApplyDetail">
+    <Key>
+      <PropertyRef Name="wfadId" />
+    </Key>
+    <Property Name="wfadId" Type="Int32" Nullable="false" />
+    <Property Name="wfadApplyId" Type="Int32" Nullable="false" />
+    <Property Name="wfadCurNodeId" Type="Int32" Nullable="false" />
+    <Property Name="wfadUserId" Type="Int32" Nullable="false" />
+    <Property Name="wfadContent" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="wfadOperation" Type="Int16" Nullable="false" />
+    <Property Name="wfadAddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="wfadIsDel" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorkFlowBLLBranchNode">
+    <Key>
+      <PropertyRef Name="bwfnId" />
+    </Key>
+    <Property Name="bwfnId" Type="Int32" Nullable="false" />
+    <Property Name="bwfnParent" Type="Int32" Nullable="false" />
+    <Property Name="bwfnResult" Type="Boolean" Nullable="false" />
+    <Property Name="bwfnNextNode" Type="Int32" Nullable="false" />
+    <Property Name="bwfnIsDel" Type="Boolean" Nullable="false" />
+    <Property Name="bwfnAddtinme" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="WorkFlowNode">
+    <Key>
+      <PropertyRef Name="wfnId" />
+    </Key>
+    <Property Name="wfnId" Type="Int32" Nullable="false" />
+    <Property Name="wfnWFId" Type="Int32" Nullable="false" />
+    <Property Name="wfnName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="wfnPrevNodeId" Type="Int32" Nullable="false" />
+    <Property Name="wfnNextNodeId" Type="Int32" Nullable="false" />
+    <Property Name="wfnType" Type="Int16" Nullable="false" />
+    <Property Name="wfnBLLClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="wfnOrder" Type="Int32" Nullable="false" />
+    <Property Name="wfnIsDel" Type="Boolean" Nullable="false" />
+    <Property Name="wfnAddtime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="WorkFlowNodeRole">
+    <Key>
+      <PropertyRef Name="wfnrId" />
+    </Key>
+    <Property Name="wfnrId" Type="Int32" Nullable="false" />
+    <Property Name="wfnrNodeId" Type="Int32" Nullable="false" />
+    <Property Name="wfnrRoleId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Employee_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="depId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="empDepId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpRoleRelation_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="EmpRoleRelation" Type="Self.EmpRoleRelation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="empId" />
+      </Principal>
+      <Dependent Role="EmpRoleRelation">
+        <PropertyRef Name="erUId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VipPermssion_Employee">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+    <End Role="VipPermssion" Type="Self.VipPermssion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="empId" />
+      </Principal>
+      <Dependent Role="VipPermssion">
+        <PropertyRef Name="vpUId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmpRoleRelation_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="EmpRoleRelation" Type="Self.EmpRoleRelation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleId" />
+      </Principal>
+      <Dependent Role="EmpRoleRelation">
+        <PropertyRef Name="erRId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePerRelationship_Permission">
+    <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+    <End Role="RolePerRelationship" Type="Self.RolePerRelationship" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permission">
+        <PropertyRef Name="perId" />
+      </Principal>
+      <Dependent Role="RolePerRelationship">
+        <PropertyRef Name="rprPerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VipPermssion_Permission">
+    <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+    <End Role="VipPermssion" Type="Self.VipPermssion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Permission">
+        <PropertyRef Name="perId" />
+      </Principal>
+      <Dependent Role="VipPermssion">
+        <PropertyRef Name="vpPId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RolePerRelationship_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="RolePerRelationship" Type="Self.RolePerRelationship" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="roleId" />
+      </Principal>
+      <Dependent Role="RolePerRelationship">
+        <PropertyRef Name="rprRoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NewCRMEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Department" EntityType="Self.Department" />
+    <EntitySet Name="Employee" EntityType="Self.Employee" />
+    <EntitySet Name="EmpRoleRelation" EntityType="Self.EmpRoleRelation" />
+    <EntitySet Name="Permission" EntityType="Self.Permission" />
+    <EntitySet Name="Role" EntityType="Self.Role" />
+    <EntitySet Name="RolePerRelationship" EntityType="Self.RolePerRelationship" />
+    <EntitySet Name="VipPermssion" EntityType="Self.VipPermssion" />
+    <EntitySet Name="WorkFLow" EntityType="Self.WorkFLow" />
+    <EntitySet Name="WorkFlowApply" EntityType="Self.WorkFlowApply" />
+    <EntitySet Name="WorkFlowApplyDetail" EntityType="Self.WorkFlowApplyDetail" />
+    <EntitySet Name="WorkFlowBLLBranchNode" EntityType="Self.WorkFlowBLLBranchNode" />
+    <EntitySet Name="WorkFlowNode" EntityType="Self.WorkFlowNode" />
+    <EntitySet Name="WorkFlowNodeRole" EntityType="Self.WorkFlowNodeRole" />
+    <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Employee" EntitySet="Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpRoleRelation_Employee" Association="Self.FK_EmpRoleRelation_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="EmpRoleRelation" EntitySet="EmpRoleRelation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VipPermssion_Employee" Association="Self.FK_VipPermssion_Employee">
+      <End Role="Employee" EntitySet="Employee" />
+      <End Role="VipPermssion" EntitySet="VipPermssion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmpRoleRelation_Role" Association="Self.FK_EmpRoleRelation_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="EmpRoleRelation" EntitySet="EmpRoleRelation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePerRelationship_Permission" Association="Self.FK_RolePerRelationship_Permission">
+      <End Role="Permission" EntitySet="Permission" />
+      <End Role="RolePerRelationship" EntitySet="RolePerRelationship" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VipPermssion_Permission" Association="Self.FK_VipPermssion_Permission">
+      <End Role="Permission" EntitySet="Permission" />
+      <End Role="VipPermssion" EntitySet="VipPermssion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RolePerRelationship_Role" Association="Self.FK_RolePerRelationship_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="RolePerRelationship" EntitySet="RolePerRelationship" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Role_Department" Association="NewCRMModel.FK_Role_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Role" EntitySet="Role" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Role_Department">
+    <End Type="NewCRMModel.Department" Role="Department" Multiplicity="0..1" />
+    <End Type="NewCRMModel.Role" Role="Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="depId" />
+      </Principal>
+      <Dependent Role="Role">
+        <PropertyRef Name="roleDepId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
