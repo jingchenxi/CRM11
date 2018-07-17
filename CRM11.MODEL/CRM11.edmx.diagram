@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7c97d3ac297e41ab931e50ce20ede9d8" Name="Diagram1">
+        <EntityTypeShape EntityType="NewCRMModel.Department" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCRMModel.Employee" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCRMModel.EmpRoleRelation" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCRMModel.Permission" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCRMModel.Role" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCRMModel.RolePerRelationship" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCRMModel.VipPermssion" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCRMModel.WorkFLow" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCRMModel.WorkFlowApply" Width="2" PointX="9.5" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCRMModel.WorkFlowApplyDetail" Width="2.625" PointX="8" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCRMModel.WorkFlowBLLBranchNode" Width="1.5" PointX="7.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCRMModel.WorkFlowNode" Width="1.5" PointX="12.375" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCRMModel.WorkFlowNodeRole" Width="1.5" PointX="9.75" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="NewCRMModel.FK_Employee_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCRMModel.FK_EmpRoleRelation_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCRMModel.FK_VipPermssion_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCRMModel.FK_EmpRoleRelation_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCRMModel.FK_RolePerRelationship_Permission" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCRMModel.FK_VipPermssion_Permission" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCRMModel.FK_RolePerRelationship_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCRMModel.FK_Role_Department" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

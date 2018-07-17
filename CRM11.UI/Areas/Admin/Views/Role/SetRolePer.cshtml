@@ -1,0 +1,48 @@
+﻿@model CRM11.UI.Areas.Admin.ModelView.SetRolePerViewModel
+@{
+    ViewBag.Title = "SetRolePer";
+}
+@section headSection{
+    <script type="text/javascript">
+        $(function () {
+            $("input[value='设置']").click(setRolePer);
+
+        })
+        function setRolePer() {
+            var ids = "";
+            var checkedNodes = $("#perTree").tree("getChecked");
+            $.each(checkedNodes, function (i, node) {
+                ids += node.id + ","
+            });
+            var indeterminateNodes = $("#perTree").tree("getChecked", "indeterminate");
+            $.each(indeterminateNodes, function (i, node) {
+                ids += node.id + ","
+            });
+            $.post("/Admin/Role/SetRolePer", { roleId:"@Model.RoleId", newPerIds: ids }, function (jsonObj) {
+                $.msgProcess(jsonObj, function () {
+                    $.globalHelper.closeCommonWindow();
+                });
+            },"json")
+        }
+    </script>
+
+}
+
+@helper LoadSonNode(int parentId)
+{
+foreach (var per in Model.AllPers.FindAll(o => o.perParent == parentId))
+{
+        <li data-options="id:@per.perId,@if (Model.RolePers.SingleOrDefault(o=>
+         o.perId == per.perId)!=null && Model.AllPers.FirstOrDefault(o=>o.perParent==per.perId) == null) {<text>checked:true</text>} ">
+            <span>@per.perName</span>
+            <ul>@LoadSonNode(per.perId)</ul>
+        </li>
+}
+}
+
+<ul id="perTree" class="easyui-tree" data-options="checkbox:true">
+    @LoadSonNode(0)
+</ul>
+<input type="button" value="设置" />
+
+

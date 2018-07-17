@@ -1,0 +1,9 @@
+F:\back\NET项目与练习\完整项目练习\新建文件夹\CRM11\CRM11.IRespository\bin\Debug\CRM11.IRespository.dll
+F:\back\NET项目与练习\完整项目练习\新建文件夹\CRM11\CRM11.IRespository\bin\Debug\CRM11.IRespository.pdb
+F:\back\NET项目与练习\完整项目练习\新建文件夹\CRM11\CRM11.IRespository\obj\Debug\CRM11.IRespository.csprojResolveAssemblyReference.cache
+F:\back\NET项目与练习\完整项目练习\新建文件夹\CRM11\CRM11.IRespository\obj\Debug\CRM11.IRespository.csproj.CoreCompileInputs.cache
+F:\back\NET项目与练习\完整项目练习\新建文件夹\CRM11\CRM11.IRespository\obj\Debug\CRM11.IRespository.dll
+F:\back\NET项目与练习\完整项目练习\新建文件夹\CRM11\CRM11.IRespository\obj\Debug\CRM11.IRespository.pdb
+F:\back\NET项目与练习\完整项目练习\新建文件夹\CRM11\CRM11.IRespository\bin\Debug\CRM11.MODEL.dll
+F:\back\NET项目与练习\完整项目练习\新建文件夹\CRM11\CRM11.IRespository\bin\Debug\CRM11.MODEL.pdb
+F:\back\NET项目与练习\完整项目练习\新建文件夹\CRM11\CRM11.IRespository\bin\Debug\CRM11.MODEL.dll.config
