@@ -1,0 +1,121 @@
+﻿@using CRM11.UI.Extension
+@{
+    ViewBag.Title = "Index";
+}
+@section headSection{
+    <style type="text/css">
+    </style>
+    <script src="~/Scripts/jquery.globalHelper.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.globalHelper.datagridPara.init("/Admin/Permission/GetPermissionList/@ViewBag.pid", [@Html.GetSonBtnJs()],
+                [[
+                    {
+                        field: 'perIsShow', title: '是否为菜单', width: 30, formatter: function (value, rowData, index) {
+                            return value ? "√" : "X";
+                        }
+                    },
+                    { field: 'perName', title: '权限名称', width: 100 },
+                    { field: 'perAreaName', title: '区域名称', width: 100 },
+                    { field: 'perControllerName', title: '控制器名称', width: 100 },
+                    { field: 'perActionName', title: 'Action名称', width: 100 },
+                    {
+                        field: 'perFormMethod', title: '请求方式', width: 50, formatter: function (value, rowData, index) {
+                            switch (value) {
+                                case 1:
+                                    return "GET";
+                                case 2:
+                                    return "POST"
+                                case 3:
+                                    return "BOTH"
+                            }
+                        }
+                    },
+
+                    {
+                        field: 'perOperationType', title: '操作类型', width: 50, formatter: function (value, rowData, index) {
+                            switch (value) {
+                                case 1:
+                                    return "MENU";
+                                case 2:
+                                    return "BUTTON";
+                                case 3:
+                                    return "AJAX";
+                            }
+
+                        }
+                    },
+                    { field: 'perOrder', title: '排序', width: 50 }
+                ]]);
+
+            $('#tbList').datagrid($.globalHelper.datagridPara.paras);
+            
+
+
+        })
+
+        @if (Html.IsBtnJsMethodExist("add")) {
+            <text>
+            function add()
+            {
+                $.globalHelper.showCommonWindow("添加权限", "/admin/permission/add", 450, 560)
+            }
+            </text>
+        }
+
+        @if (Html.IsBtnJsMethodExist("viewSons")) {
+            <text>
+            function viewSons()
+            {
+                ifSelectedRowData(function (selectedRowData) {
+                    $.globalHelper.showCommonWindow("查看【" + selectedRowData.perName + "】子权限列表", "/admin/permission/SonIndex/" + selectedRowData.perId);
+                });
+            }
+            </text>
+        }
+
+        @if (Html.IsBtnJsMethodExist("remove")) {
+            <text>
+            function remove()
+            {
+                ifSelectedRowData(function (selectedRowData) {
+                    $.messager.confirm("系统消息", "是否确定要删除【" + selectedRowData.perName+"】权限", function (isOk) {
+                        if (isOk) {
+                            $.post("/admin/Permission/Remove", { deleteId: selectedRowData.perId}, function (xhrObj) {
+                                $.msgProcess(xhrObj);
+                                $.globalHelper.reloadSelectedTapDataGrid();
+                            })
+                        }
+                    })
+                });
+
+
+            }
+            </text>
+        }
+
+       @if (Html.IsBtnJsMethodExist("modify")) {
+           <text>
+            function modify() {
+                ifSelectedRowData(function (selectedRowData) {
+                    $.globalHelper.showCommonWindow("修改【" + selectedRowData.perName + "】权限", "/admin/permission/modify/" + selectedRowData.perId, 450, 560);
+                });
+              }
+           </text>
+        }
+
+
+            function ifSelectedRowData(func) {
+                var selectedRowData = $('#tbList').datagrid("getSelected");
+                if (selectedRowData) {
+                    if (func && func instanceof Function) {
+                        func(selectedRowData);
+                    }
+                } else
+                {
+                    $.msgBoxObj.showInfo("请选择要进行操作的行");
+                }
+            }
+    </script>
+}
+<table id="tbList"></table>
